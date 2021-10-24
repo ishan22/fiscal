@@ -18,7 +18,7 @@ function getItems() {
 }
 
 function formatString() {
-    let outString = "Someone tried to order"
+    let outString = " tried to order"
     console.log(outString)
     let items = getItems();
     outString += " " + items[0]
@@ -32,22 +32,33 @@ function formatString() {
     return outString
 }
 
+function contact(items) {
+    chrome.storage.sync.get(["phoneNumber", "name"], function (obj) {
+        number = obj.phoneNumber;
+        firstName = obj.name;
+        console.log(obj)
+        let output = firstName + items
+        output = output.replace("\n", "")
+        fetch('https://api.twilio.com/2010-04-01/Accounts/ACa7ec0cb8c7c56cf6e9950157b31d029a/Messages.json', {
+            method: 'POST',
+            headers: {
+                Authorization: "Basic QUNhN2VjMGNiOGM3YzU2Y2Y2ZTk5NTAxNTdiMzFkMDI5YTpjNzVmZDJiMDAxMTNjNjAzNmUzY2I1ZjE2NGVhNGUwZA=="
+            },
+            body: new URLSearchParams({
+                'To': "'" + number,
+                'Body': output,
+                'MessagingServiceSid': 'MGdf99582a2d82c447cae92a9d150b3829'
+            })
+        })
+
+    });
+}
 
 function update() {
     let msg = formatString()
+    contact(msg)
     document.body.innerHTML = confirmation;
-    fetch('https://api.twilio.com/2010-04-01/Accounts/ACa7ec0cb8c7c56cf6e9950157b31d029a/Messages.json', {
-    method: 'POST',
-    headers: {
-        Authorization: "Basic QUNhN2VjMGNiOGM3YzU2Y2Y2ZTk5NTAxNTdiMzFkMDI5YTpjNzVmZDJiMDAxMTNjNjAzNmUzY2I1ZjE2NGVhNGUwZA=="
-      },
-    body: new URLSearchParams({
-        'To': '+14253817303',
-        'Body': msg,
-        'MessagingServiceSid': 'MGdf99582a2d82c447cae92a9d150b3829'
-    })
-}).then(response => response.json())
-    .then(data => console.log(data));
+    
 }
 
 var buttonHtml = `<span id="submitFakeOrderButtonId" class="a-button a-button-span12 a-button-primary continue-button celwidget buy-button-height buy-button-sky-fix">
