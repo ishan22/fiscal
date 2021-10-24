@@ -65,7 +65,7 @@ var buttonHtml = `<span id="submitFakeOrderButtonId" class="a-button a-button-sp
     <span class="a-button-inner">
     <input name="fakeOrderPlace" id="fakeOrder" class="a-button-input" type="button">
     <span id="submitFakeOrderButtonId-announce" class="a-button-text" aria-hidden="true">
-    <span class="place-order-button-text buy-button-line-height">Place your order NOW</span>
+    <span class="place-order-button-text buy-button-line-height">Place your order</span>
     </span></span></span>`;
 
 for (let index = 0; index < submits.length; index++) {
