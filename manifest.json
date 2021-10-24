@@ -18,7 +18,14 @@
     "content_scripts": [
         {
             "matches": ["https://www.amazon.com/gp/buy/spc/handlers/*"],
-            "js": ["test.js"]
+            "js": ["test.js"],
+            "run_at": "document_end"
         }
+    ],
+    "web_accessible_resources": [
+        "client/confirmation.html"
+    ],
+    "permissions": [
+        "tabs"
     ]
 }
