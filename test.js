@@ -45,7 +45,7 @@ function contact(items) {
                 Authorization: "Basic QUNhN2VjMGNiOGM3YzU2Y2Y2ZTk5NTAxNTdiMzFkMDI5YTpjNzVmZDJiMDAxMTNjNjAzNmUzY2I1ZjE2NGVhNGUwZA=="
             },
             body: new URLSearchParams({
-                'To': "'" + number,
+                'To': "+1" + number,
                 'Body': output,
                 'MessagingServiceSid': 'MGdf99582a2d82c447cae92a9d150b3829'
             })
